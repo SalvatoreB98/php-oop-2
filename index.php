@@ -11,6 +11,9 @@
 <body>
     <?php
     require_once(__DIR__ . "/classes/classes.php");
+
+
+    
     // L'USER SI REGISTRA
     echo "UTENTE REGISTRATO CON SUCCESSO";
     $user1 = new User("Salvatore", "salvatore.butera1998@gmail.com", "password123");
@@ -26,11 +29,17 @@
     $cart = new Cart($articles);
     foreach ($cart->articles as $key => $article) {
         echo "<br>" . $article->productName . "<br> PREZZO: " . $article->price . "<br><br>";
+    
     }
-    //L'user seleziona metodo di pagamento
+
+
+    //L'USER INSERISCE UNA CARTA DI CREDITO
     $date = "04/21";
     $card = new CreditCard("5333 018 100", $date);
+    var_dump($card);
     echo "TOTALE CARRELLO: " . $cart->calculateTotalPrice();
+
+
     // L'USER EFFETTA IL PAGAMENTO
     $payment = new Payment($card, $cart->calculateTotalPrice());
     ?>
