@@ -29,7 +29,7 @@ class Article {
         $this->setPrice($price);
     }
     public function setPrice($value){
-        $this->title = $value;
+        $this->price = $value;
     }
     private function setProductID(){
         $product_id = rand(0,1000);
@@ -39,14 +39,13 @@ class CreditCard {
     private $number;
     private $cvv;
     private $expDate;
-    function __construct($user,$transaction)
+    function __construct($number,$expDate)
     {
-        $this->id_payment= rand(0,1000);
-        $this->$user($user);
-        $this->$transaction($transaction);
+        $this->number = $number;
+        $this->expDate = $expDate;
     }
-    public function setPrice($value){
-        $this->title = $value;
+    public function getExpDate(){
+        return $this->expDate;
     }
 }
 class Payment {
@@ -54,7 +53,7 @@ class Payment {
     public $user;
     private $amount;
     public $status;
-    function __construct($creditCards,$total)
+    function __construct($creditCard,$total)
     {
         $this->id_payment= rand(0,1000);
         $this->amount=$total;
@@ -69,10 +68,9 @@ class Cart {
     public $articles;
     function __construct($articles){
         $this->articles = $articles;
-        $this->calculateTotalPrice();
     }
     public function calculateTotalPrice(){
-        foreach ( $this->articles as $key => $article) {
+        foreach ( $this->articles as $article) {
             $this->total += $article->price;
         }
         return $this->total;
