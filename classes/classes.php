@@ -52,6 +52,7 @@ class Payment {
     public $id_payment;
     public $user;
     private $amount;
+    private $creditCard;
     public $status;
     function __construct($creditCard,$total)
     {
@@ -60,6 +61,11 @@ class Payment {
     }
     public function getAmount(){
         return $this->amount;
+    }
+    public function doTransaction(){
+        if($this->creditCard->getExpDate() < date("mm/yy")){
+            $this->status = "DATE ENSPIRED";
+        }
     }
 }
 
