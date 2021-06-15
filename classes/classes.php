@@ -64,7 +64,7 @@ class Payment {
     }
     public function doTransaction(){
         if($this->creditCard->getExpDate() < date("mm/yy")){
-            $this->status = "DATE ENSPIRED";
+            $this->status = "CARD EXPIRED";
         }
     }
 }
