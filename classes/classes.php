@@ -1,5 +1,6 @@
 <?php
-class User {
+class User
+{
     private $userID;
     private $password;
     public $name;
@@ -7,89 +8,108 @@ class User {
     public $price;
     public $creditCards = [];
     public $wallet = 100;
-    function __construct($name,$email,$password)
+    function __construct($name, $email, $password)
     {
         $id = substr(uniqid('', true), -5);
         $this->setID($id);
     }
-    public function setID($value){
+    public function setID($value)
+    {
         $this->userID = $value;
     }
-    private function setPassword($value){
-        $this->password = password_hash($value,PASSWORD_DEFAULT);
+    private function setPassword($value)
+    {
+        $this->password = password_hash($value, PASSWORD_DEFAULT);
     }
 }
-class Article {
+class Article
+{
     public $product_id;
     public $productName;
     public $price;
-    function __construct($name,$price)
+    function __construct($name, $price)
     {
         $this->productName = $name;
         $this->setPrice($price);
     }
-    public function setPrice($value){
+    public function setPrice($value)
+    {
         $this->price = $value;
     }
-    private function setProductID(){
-        $product_id = rand(0,1000);
+    private function setProductID()
+    {
+        $product_id = rand(0, 1000);
     }
 }
-class CreditCard {
+class CreditCard
+{
     private $number;
     private $cvv;
     private $expDate;
-    function __construct($number,$expDate)
+    function __construct($number, $expDate)
     {
         $this->number = $number;
         $this->expDate = $expDate;
     }
-    public function getExpDate(){
+    public function getExpDate()
+    {
         return $this->expDate;
     }
 }
-class Payment {
+class Payment
+{
     public $id_payment;
     public $user;
     private $amount;
-    private $creditCard;
+    public $creditCard;
     public $status;
-    function __construct($creditCard,$total)
+    function __construct($creditCard, $total)
     {
-        $this->id_payment= rand(0,1000);
-        $this->amount=$total;
+        $this->creditCard = $creditCard;
+        $this->id_payment = rand(0, 1000);
+        $this->amount = $total;
+        $this->doTransaction();
     }
-    public function getAmount(){
+    public function getAmount()
+    {
         return $this->amount;
     }
-    public function doTransaction(){
-        if($this->creditCard->getExpDate() < date("mm/yy")){
+    private function doTransaction()
+    {
+        $cardDate = $this->creditCard->getExpDate();
+        $currentDate = date("y/m");
+        var_dump($cardDate);
+        var_dump($currentDate);
+        if ($cardDate < $currentDate) {
             $this->status = "CARD EXPIRED";
+            echo $this->status . "!";
         }
     }
 }
 
-class Cart {
+class Cart
+{
     public $total;
     public $articles;
-    function __construct($articles){
+    function __construct($articles)
+    {
         $this->articles = $articles;
     }
-    public function calculateTotalPrice(){
-        foreach ( $this->articles as $article) {
+    public function calculateTotalPrice()
+    {
+        foreach ($this->articles as $article) {
             $this->total += $article->price;
         }
         return $this->total;
     }
 }
 
-class PremiumUser extends User {
-    public $premium_codes = ['SUMMER10','PRIME20'];
+class PremiumUser extends User
+{
+    public $premium_codes = ['SUMMER10', 'PRIME20'];
     public $isPremium;
     function __construct($primeValidation)
     {
-        $this->isPremium=$primeValidation;
+        $this->isPremium = $primeValidation;
     }
 }
-
-?>
