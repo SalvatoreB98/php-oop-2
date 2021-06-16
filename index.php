@@ -17,18 +17,18 @@
     require_once(__DIR__ . "/classes/CREDIT CARD.php");
     $userIsLogged = false;
     ?>
-        <h2>Registrazione</h2>
-        <form method="POST">
-            Nome utente: <input type="text" name="name">
-            Email: <input type="text" name="email">
-            Password: <input type="text" name="password">
-            età: <input type="number" name="password">
-            <button onClick="window.location.reload();" type="submit">REGISTRATI</button>
-        </form>
+    <h2>Registrazione</h2>
+    <form method="POST">
+        Nome utente: <input type="text" name="name">
+        Email: <input type="text" name="email">
+        Password: <input type="password" name="password">
+        età: <input type="number" name="age">
+        <button type="submit">REGISTRATI</button>
+    </form>
     <?php
     // L'USER SI REGISTRA
     try {
-        if (!empty($_POST["name"]) && !empty($_POST["email"]) && !empty($_POST["password"])) {
+        if (!empty($_POST["name"]) && !empty($_POST["email"]) && !empty($_POST["password"]) && !empty($_POST["age"])) {
             $user1 = new User($_POST["name"], $_POST["email"], $_POST["password"]);
             $userIsLogged = true;
             echo "<br> UTENTE REGISTRATO CON SUCCESSO";
@@ -56,6 +56,7 @@
         $date = "24/01";
         $card = new CreditCard("5333 018 100", $date);
         echo "TOTALE CARRELLO: " . $cart->calculateTotalPrice();
+
 
 
         // L'USER EFFETTA IL PAGAMENTO

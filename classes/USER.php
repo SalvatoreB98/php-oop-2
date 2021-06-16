@@ -25,8 +25,7 @@ class User
             throw new Exception("Email già registrata", 1);
         }
         if(!strstr($email,"@")){
-            var_dump($email);
-            throw new Exception("Email non valida!",1);
+            throw new Exception("Inserire una mail valida con @ e dominio!",1);
         }
         $this->email=$email;
     }

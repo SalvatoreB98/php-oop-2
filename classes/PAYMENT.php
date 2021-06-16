@@ -27,7 +27,7 @@ class Payment
             $this->status = "CARD EXPIRED";
             echo $this->status . "!";
         }else{
-            echo "<br> CARTA OK";
+            echo "<br> PAGAMENTO OK";
         }
     }
 }
