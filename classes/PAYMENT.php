@@ -23,13 +23,11 @@ class Payment
     {
         $cardDate = $this->creditCard->getExpDate();
         $currentDate = date("y/m");
-        var_dump($cardDate);
-        var_dump($currentDate);
         if ($cardDate < $currentDate) {
             $this->status = "CARD EXPIRED";
             echo $this->status . "!";
         }else{
-            echo "CARTA OK";
+            echo "<br> CARTA OK";
         }
     }
 }

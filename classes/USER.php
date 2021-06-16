@@ -24,6 +24,10 @@ class User
         if ($this->userExist($email)) {
             throw new Exception("Email già registrata", 1);
         }
+        if(!strstr($email,"@")){
+            var_dump($email);
+            throw new Exception("Email non valida!",1);
+        }
         $this->email=$email;
     }
     public function setID($value)
@@ -37,7 +41,8 @@ class User
     // VALIDATION
     private function userExist($email)
     {
+        $toReturn = false;
         //controllo per vedere se l'email risulta negli utenti
-        return true;
+        return $toReturn;
     }
 }
